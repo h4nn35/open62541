@@ -21,7 +21,7 @@ extern "C" {
 /* Thread Local Storage */
 # if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
 #  define UA_THREAD_LOCAL _Thread_local /* C11 */
-# elif defined(__GNUC__)
+# elif defined(__GNUC__) || defined (__TINYC__)
 #  define UA_THREAD_LOCAL __thread /* GNU extension */
 # elif defined(_MSC_VER)
 #  define UA_THREAD_LOCAL __declspec(thread) /* MSVC extension */
