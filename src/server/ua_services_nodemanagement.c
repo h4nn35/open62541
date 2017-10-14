@@ -160,10 +160,9 @@ typeCheckVariableNode(UA_Server *server, UA_Session *session,
     /* If variable node is created below BaseObjectType and has its default valueRank of -2,
      * skip the test */
     const UA_NodeId objectTypes = UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE);
-    const UA_NodeId refs[] = {
-            UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE),
-            UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT)
-    };
+    UA_NodeId refs[2];
+    refs[0] = UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE);
+    refs[1] = UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT);
     if(node->valueRank != vt->valueRank &&
        node->valueRank != UA_VariableAttributes_default.valueRank &&
        !isNodeInTree(&server->config.nodestore, parentNodeId, &objectTypes, refs , 2)) {
@@ -702,10 +701,9 @@ Operation_addNode_finish(UA_Server *server, UA_Session *session, const UA_NodeId
                 const UA_NodeId variableTypes = UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE);
                 /* A variable may be of an object type which again is below BaseObjectType */
                 const UA_NodeId objectTypes = UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE);
-                const UA_NodeId refs[] = {
-                        UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE),
-                        UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT)
-                };
+				UA_NodeId refs[2];
+				refs[0] = UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE);
+				refs[1] = UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT);
                 if(!isNodeInTree(&server->config.nodestore, parentNodeId,
                                  &variableTypes, refs , 2) &&
                    !isNodeInTree(&server->config.nodestore, parentNodeId,
@@ -723,10 +721,9 @@ Operation_addNode_finish(UA_Server *server, UA_Session *session, const UA_NodeId
                     ((const UA_ObjectTypeNode*)type)->isAbstract) {
                 /* Object node created of an abstract ObjectType. Only allowed if within BaseObjectType folder */
                 const UA_NodeId objectTypes = UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE);
-                const UA_NodeId refs[] = {
-                        UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE),
-                        UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT)
-                };
+				UA_NodeId refs[2];
+				refs[0] = UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE);
+				refs[1] = UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT);
                 if(!isNodeInTree(&server->config.nodestore, parentNodeId,
                                  &objectTypes, refs , 2)) {
                     UA_LOG_INFO_SESSION(server->config.logger, session,
